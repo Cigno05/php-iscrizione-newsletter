@@ -1,16 +1,11 @@
 <?php
 
-$email = $_POST['inputEmail'] ?? null;
+// var_dump($_POST);
 
-$email_control = false;
+$email = $_POST['inputEmail'] ?? '';
 
-if ($email === null) {
-    $email_control === null;
-} elseif (str_contains($email, '.') && str_contains($email, '@')) {
-    $email_control = true;
-} else {
-    $email_control = false;
-}
+include_once __DIR__ .'/utilities.php';
+
 
 
 ?>
@@ -30,35 +25,24 @@ if ($email === null) {
 <body>
     <div class="container">
 
-        <form>
+        <form method="POST">
             <div class="mb-3">
                 <label for="inputEmail" class="form-label">Aderisci alla Newsletter</label>
-                <input type="email" class="form-control" id="inputEmail" placeholder="Inserisci la tua email...">
+                <input class="form-control" id="inputEmail" name="inputEmail" placeholder="Inserisci la tua email...">
             </div>
 
             <button type="submit" class="btn btn-primary">Aderisci</button>
         </form>
 
-        <?php
-        if ($email_control = true) {
-            ?>
+        <?php if (array_key_exists('inputEmail', $_POST) == false) { ?>
+            <!-- <div class="alert alert-primary" role="alert">Iscriviti!</div> -->
 
-            <div class="mt-4 alert alert-success" role="alert">
-                Iscrizione andata a buon fine!!!
-            </div>
-            <?php
-        } elseif ($email_control = false) {
-            ?>
-            <div class="alert alert-danger" role="alert">
-                Email errata!!!
-            </div>
-            <?php } elseif ($email_control === null) {
-                ?>
-                <div class="alert alert-primary" role="alert">
-                Iscriviti!
-            </div>
-                <?php
-            } ?>
+        <?php } elseif (controlEmail($email) == true) { ?>
+            <div class="mt-4 alert alert-success" role="alert">Iscrizione andata a buon fine!!!</div>
+
+        <?php } elseif (controlEmail($email) == false) { ?>
+            <div class="mt-4 alert alert-danger" role="alert">Email errata!!!</div>
+        <?php } ?>
 
     </div>
 
