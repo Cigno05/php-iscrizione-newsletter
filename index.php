@@ -4,7 +4,7 @@
 
 $email = $_POST['inputEmail'] ?? '';
 
-include_once __DIR__ .'/utilities.php';
+include_once __DIR__ . '/utilities.php';
 
 
 
@@ -23,29 +23,44 @@ include_once __DIR__ .'/utilities.php';
 </head>
 
 <body>
-    <div class="container">
 
-        <form method="POST">
-            <div class="mb-3">
-                <label for="inputEmail" class="form-label">Aderisci alla Newsletter</label>
-                <input class="form-control" id="inputEmail" name="inputEmail" placeholder="Inserisci la tua email...">
-            </div>
+    <header>
+        <?php include_once __DIR__ . '/components/header.php'; ?>
+    </header>
 
-            <button type="submit" class="btn btn-primary">Aderisci</button>
-        </form>
+    <main>
 
-        <?php if (array_key_exists('inputEmail', $_POST) == false) { ?>
-            <!-- <div class="alert alert-primary" role="alert">Iscriviti!</div> -->
+        <div class="container my-4">
 
-        <?php } elseif (controlEmail($email) == true) { ?>
-            <div class="mt-4 alert alert-success" role="alert">Iscrizione andata a buon fine!!!</div>
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Aderisci alla Newsletter</label>
+                    <input class="form-control" id="inputEmail" name="inputEmail"
+                        placeholder="Inserisci la tua email...">
+                </div>
 
-        <?php } elseif (controlEmail($email) == false) { ?>
-            <div class="mt-4 alert alert-danger" role="alert">Email errata!!!</div>
-        <?php } ?>
+                <button type="submit" class="btn btn-primary">Aderisci</button>
+            </form>
 
-    </div>
+            <?php if (array_key_exists('inputEmail', $_POST) == false) { ?>
+                <!-- <div class="alert alert-primary" role="alert">Iscriviti!</div> -->
+
+            <?php } elseif (controlEmail($email) == true) { ?>
+                <div class="mt-4 alert alert-success" role="alert">Iscrizione andata a buon fine!!!</div>
+
+            <?php } elseif (controlEmail($email) == false) { ?>
+                <div class="mt-4 alert alert-danger" role="alert">Email errata!!!</div>
+            <?php } ?>
+
+        </div>
+    </main>
+
+    <footer>
+        <?php include_once __DIR__ . '/components/footer.php'; ?>
+    </footer>
 
 </body>
+
+
 
 </html>
